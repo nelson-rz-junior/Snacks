@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ListUserViewModel>
+
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<div class="p-1 my-2 headerColor">
+    <div class="row">
+        <div class="col-sm-10 text-center text-dark">
+            <h4>
+                <small>Usuários</small>
+            </h4>
+        </div>
+        <div class="col-sm-2">
+            <a asp-action="Create" class="btn btn-outline-dark float-right w-100">
+                Criar usuário
+            </a>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="fas fa-trash-alt btn btn-outline-danger float-right" style="margin-left:10px" title="Remover" />
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="fas fa-edit btn btn-outline-success float-right" title="Editar" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

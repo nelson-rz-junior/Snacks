@@ -1,0 +1,196 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Detalhe do pedido";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Detalhe do pedido #@Model.Id</small>
+            </h4>
+        </div>
+        <hr />
+        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BasketId)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.BasketId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalOrder)
+        </dt>
+        <dd class="col-sm-4">
+            @Model.TotalOrder.ToString("c")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        @if (Model.IsPaid)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PaymentDate)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.PaymentDate)
+            </dd>
+        }
+        else
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.IsPaid)
+            </dd>
+        }
+
+        @if (Model.IsDelivery)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DeliveryDate)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.DeliveryDate)
+            </dd>
+        }
+        else
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsDelivery)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.IsDelivery)
+            </dd>
+        }
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Complement)
+        </dt>
+        <dd class="col-sm-4">
+            @if (string.IsNullOrWhiteSpace(Model.Complement))
+            {
+                <label> - </label>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Complement)
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+    </dl>
+
+    @if (Model.OrderItems.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderItems.First().Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderItems.First().SnackName)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.OrderItems.First().Quantity)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.OrderItems.First().UnitPrice)
+                    </th>
+                    <th class="text-center">
+                        Subtotal
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var orderItem in Model.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => orderItem.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => orderItem.SnackName)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => orderItem.Quantity)
+                        </td>
+                        <td class="text-right">
+                            @orderItem.UnitPrice.ToString("c")
+                        </td>
+                        <td class="text-right">
+                            @((orderItem.UnitPrice * orderItem.Quantity).ToString("c"))
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4" class="text-right">
+                        <b>Total</b>
+                    </td>
+                    <td class="text-right">
+                        @Model.TotalOrder.ToString("c")
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+
+    <div class="row">
+        <div class="col-sm">
+            <a asp-action="Index" class="btn btn-outline-secondary float-right">Lista de pedidos</a>
+        </div>
+    </div>
+</div>

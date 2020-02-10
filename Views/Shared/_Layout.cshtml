@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Snacks</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    @* https://getbootstrap.com/docs/4.0/components/navbar/ *@
+    @* https://getbootstrap.com/docs/4.0/components/carousel/ *@
+    @* https://getbootstrap.com/docs/4.0/components/buttons/ *@
+    @* https://getbootstrap.com/docs/4.0/utilities/spacing/ *@
+
+    @* https://fontawesome.com/icons?d=gallery&m=free *@
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light headerColor">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    Snacks
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        @await Html.PartialAsync("_LoginPartial")
+                        @await Component.InvokeAsync("SummaryBasket")
+                    </ul>
+                    <ul class="navbar-nav">
+                        @await Component.InvokeAsync("MenuCategory", "Categorias")
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0" asp-controller="Snack" asp-action="Search" method="get">
+                        <input class="form-control mx-sm-2" type="search" placeholder="Digite sua busca..." aria-label="Search" name="q">
+                        <button class="form-control btn btn-outline-dark my-2 my-sm-0" type="submit">
+                            Buscar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Snacks - <a asp-controller="Contact" asp-action="Index" class="text-dark text-decoration-none">Contato</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

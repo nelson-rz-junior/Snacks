@@ -1,0 +1,15 @@
+﻿@model Snack
+
+<div class="col-sm-12 p-2 text-dark headerColor my-2">
+    <h5>
+        <small>
+            <a asp-controller="Home" asp-action="Index" class="text-dark text-decoration-none">
+                Home
+            </a>
+            >
+            <a asp-controller="Snack" asp-action="List" asp-route-categoryName="@Model.Category.Name" class="text-dark text-decoration-none">
+                @Model.Category.Name
+            </a>
+        </small>
+    </h5>
+</div>

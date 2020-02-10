@@ -1,0 +1,20 @@
+﻿@model HomeViewModel
+
+@{ 
+    ViewData["Title"] = "Home";
+}
+
+@await Html.PartialAsync("_Carousel")
+
+<div class="p-1 text-dark text-center my-2 headerColor">
+    <h4>
+        <small>Destaques</small>
+    </h4>
+</div>
+
+<div class="row">
+    @foreach (var snack in Model.FavoriteSnacks)
+    {
+        <partial name="_SummarySnack" model="snack" />
+    }
+</div>

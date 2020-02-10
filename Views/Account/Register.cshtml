@@ -1,0 +1,56 @@
+﻿@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Cadastro</small>
+            </h4>
+        </div>
+        <hr />
+        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+
+<form asp-controller="Account" asp-action="Register" method="post">
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="ConfirmPassword" class="control-label"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm">
+            <input type="submit" class="btn btn-outline-success float-right w-25" value="Cadastrar" />
+        </div>
+    </div>
+</form>

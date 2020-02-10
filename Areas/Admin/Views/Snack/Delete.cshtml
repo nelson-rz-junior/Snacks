@@ -1,0 +1,80 @@
+﻿@model Snack
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Remover produto #@Model.Id</small>
+            </h4>
+        </div>
+        <hr />
+        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+
+<div class="text-danger">
+    <h4>
+        <small>Tem certeza que deseja remover este produto?</small>
+    </h4>
+</div>
+
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.SummaryDescription)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.SummaryDescription)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.FullDescription)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.FullDescription)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Price)
+    </dt>
+    <dd class="col-sm-9">
+        @Model.Price.ToString("c")
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.IsFavoriteSnack)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.IsFavoriteSnack)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.InStock)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.InStock)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Category)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Category.Name)
+    </dd>
+</dl>
+
+<form asp-area="Admin" asp-controller="Snack" asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-row">
+        <div class="form-group col-sm">
+            <input type="submit" class="btn btn-outline-danger float-right" style="margin-left:10px" value="Remover produto" />
+            <a asp-action="Index" class="btn btn-outline-secondary float-right">Lista de produtos</a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,40 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Editar categoria";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Editar categoria #@Model.Id</small>
+            </h4>
+        </div>
+        <hr />
+        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+
+<form asp-area="Admin" asp-controller="Category" asp-action="Edit" method="post">
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <input type="submit" class="btn btn-outline-success float-right" style="margin-left:10px" value="Salvar categoria" />
+            <a asp-action="Index" class="btn btn-outline-secondary float-right">Lista de categorias</a>
+        </div>
+    </div>
+</form>

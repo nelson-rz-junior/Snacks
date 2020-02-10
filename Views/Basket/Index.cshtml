@@ -1,0 +1,128 @@
+﻿@model BasketViewModel
+
+@{ 
+    ViewData["Title"] = "Carrinho de compras";
+    var hasbasketItems = Model.BasketItems.Any();
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Seu carrinho de compras</small>
+            </h4>
+        </div>
+        <hr />
+        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm">
+        @if (hasbasketItems)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Produto
+                        </th>
+                        <th>
+                            Quantidade
+                        </th>
+                        <th class="text-right">
+                            Preço Unitário
+                        </th>
+                        <th class="text-right">
+                            Subtotal
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.BasketItems)
+                    {
+                    <tr>
+                        <td class="text-left">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@item.SnackId" title="@item.SnackName">
+                                        <img src="@item.Snack.ThumbImageUrl" width="100" height="100" />
+                                    </a>
+                                </div>
+                                <div class="col-sm">
+                                    <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@item.SnackId" class="text-dark text-decoration-none">
+                                        @item.SnackName
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center align-middle">
+                            @item.Quantity
+                        </td>
+                        <td class="text-right align-middle">
+                            @item.UnitPrice.ToString("c")
+                        </td>
+                        <td class="text-right align-middle">
+                            @((item.Quantity * item.UnitPrice).ToString("c"))
+                        </td>
+                        <td class="text-center align-middle">
+                            <a class="fas fa-trash-alt" asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-snackId="@item.SnackId"></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">
+                            <b>Total</b>
+                        </td>
+                        <td class="text-right">
+                            @Model.Total.ToString("c")
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+        else
+        {
+            <div class="jumbotron text-center">
+                <h4>
+                    <small>Carrinho de compras vazio</small>
+                </h4>
+            </div>
+        }
+
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="row">
+                            @if (hasbasketItems)
+                            {
+                                <div class="col-sm-3 offset-sm-6">
+                                    <ul class="navbar-nav flex-grow-1">
+                                        @await Component.InvokeAsync("MenuCategory", "Adicionar mais produtos")
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-outline-success my-2 my-lg-0 w-100" asp-controller="Order" asp-action="Checkout">
+                                        Encerrar Pedido
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-sm-3 offset-sm-9">
+                                    <ul class="navbar-nav flex-grow-1">
+                                        @await Component.InvokeAsync("MenuCategory", "Adicionar produtos")
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@model Snack
+
+<div class="col-sm-3 my-2">
+    <div class="figure-caption">
+        <div class="img-thumbnail">
+            <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@Model.Id">
+                <img src="@Model.StorefrontImageUrl" class="mx-auto d-block" width="200" height="200" title="@Model.Name" />
+            </a>
+        </div>
+        <div>
+            <a class="text-dark text-decoration-none" asp-controller="Snack" asp-action="Details" asp-route-snackId="@Model.Id">
+                <h3>
+                    <small>@Model.Name</small>
+                </h3>
+            </a>
+        </div>
+        <p>
+            <a class="text-dark text-decoration-none" asp-controller="Snack" asp-action="Details" asp-route-snackId="@Model.Id">
+                @Model.SummaryDescription
+            </a>
+        </p>
+        <div class="text-right text-primary mb-2">
+            <h3>
+                <small>@Model.Price.ToString("c")</small>
+            </h3>
+        </div>
+        <div>
+            @if (Model.InStock)
+            {
+                <a class="col-sm btn btn-outline-success w-100" asp-controller="Basket" asp-action="AddBasketItem" asp-route-snackId="@Model.Id">
+                    Adicionar ao carrinho
+                </a>
+            }
+            else
+            {
+                <a class="col-sm btn btn-danger w-100 text-white disabled">
+                    Indisponível
+                </a>
+            }
+        </div>
+    </div>
+</div>

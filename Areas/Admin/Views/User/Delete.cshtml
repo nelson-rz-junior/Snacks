@@ -1,0 +1,56 @@
+﻿@model ListUserViewModel
+
+@{
+    ViewData["Title"] = "Remover usuário";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Remover usuário #@Model.Id</small>
+            </h4>
+        </div>
+        <hr />
+        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+
+<div class="text-danger">
+    <h4>
+        <small>Tem certeza que deseja remover este usuário?</small>
+    </h4>
+</div>
+
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Role)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Role)
+    </dd>
+</dl>
+
+<form asp-area="Admin" asp-controller="User" asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <input type="submit" class="btn btn-outline-danger float-right" style="margin-left:10px" value="Remover usuário" />
+            <a asp-action="Index" class="btn btn-outline-secondary float-right">Lista de usuários</a>
+        </div>
+    </div>
+</form>

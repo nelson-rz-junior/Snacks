@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200104002503_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200104002503_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200122152602_BasketAndItems.cs" />
+    <Compile Remove="Migrations\20200122152602_BasketAndItems.Designer.cs" />
+    <Compile Remove="Migrations\20200123141727_BasketIdOrderItem.cs" />
+    <Compile Remove="Migrations\20200123141727_BasketIdOrderItem.Designer.cs" />
+    <Compile Remove="Migrations\20200123142355_ColumnTypeDecimal.cs" />
+    <Compile Remove="Migrations\20200123142355_ColumnTypeDecimal.Designer.cs" />
+    <Compile Remove="Migrations\20200123142736_ColumnTypeDecimal.cs" />
+    <Compile Remove="Migrations\20200123142736_ColumnTypeDecimal.Designer.cs" />
+    <Compile Remove="Migrations\20200123142954_ColumnBasketId.cs" />
+    <Compile Remove="Migrations\20200123142954_ColumnBasketId.Designer.cs" />
+    <Compile Remove="Migrations\20200123143955_BasketIdOrderItem.cs" />
+    <Compile Remove="Migrations\20200123143955_BasketIdOrderItem.Designer.cs" />
+    <Compile Remove="Migrations\20200123144118_BasketIdOrderItemGuid.cs" />
+    <Compile Remove="Migrations\20200123144118_BasketIdOrderItemGuid.Designer.cs" />
+    <Compile Remove="Migrations\20200123144221_RemoveBasketIdOrderItem.cs" />
+    <Compile Remove="Migrations\20200123144221_RemoveBasketIdOrderItem.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Areas\Admin\Views\Category\ve-69EE.tmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+
+
+</Project>

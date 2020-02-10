@@ -1,0 +1,10 @@
+﻿@model BasketViewModel
+
+<li class="nav-item">
+    <a class="btn btn-outline-dark mx-sm-2 my-2 my-lg-0 w-100" asp-controller="Basket" asp-action="Index">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-status">
+            @Model.BasketItems.Count
+        </span>
+    </a>
+</li>

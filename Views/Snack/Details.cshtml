@@ -1,0 +1,50 @@
+﻿@model Snack
+
+@{ 
+    ViewData["Title"] = "Detalhes do produto";
+}
+
+<div class="container">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", Model)
+        <div class="col-sm img-thumbnail">
+            <img src="@Model.DetailImageUrl" class="mx-auto d-block" width="400" height="400" title="@Model.Name">
+        </div>
+        <div class="col-sm">
+            <div>
+                <h3>
+                    <small>@Model.Name</small>
+                </h3>
+            </div>
+            <p class="card-text">
+                @Model.FullDescription
+            </p>
+            <div class="text-right text-primary mb-4">
+                <h3>
+                    <small>@Model.Price.ToString("c")</small>
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a asp-controller="Snack" asp-action="List" class="btn btn-outline-dark w-100">
+                        Todos os produtos
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    @if (Model.InStock)
+                    {
+                        <a class="btn btn-outline-success w-100" asp-controller="Basket" asp-action="AddBasketItem" asp-route-snackId="@Model.Id">
+                            Adicionar ao carrinho
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger text-white w-100 disabled">
+                            Indisponível
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

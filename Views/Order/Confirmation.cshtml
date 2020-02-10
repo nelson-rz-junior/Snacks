@@ -1,0 +1,25 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Confirmação do pedido";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Confirmação do pedido</small>
+            </h4>
+        </div>
+        <hr />
+        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="text-center">
+        <h4>
+            <small>Pedido recebido com sucesso!</small>
+        </h4>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿@model SnackListViewModel
+
+@{
+    ViewData["Title"] = "Tipos de produtos";
+}
+
+<div class="p-1 text-dark text-center headerColor my-2">
+    <h4>
+        <small>@Model.CurrentCategory</small>
+    </h4>
+</div>
+
+<div class="row">
+    @if (Model.Snacks.Any())
+    {
+        @foreach (var snack in Model.Snacks)
+        {
+            <partial name="_SummarySnack" model="snack" />
+        }
+    }
+    else
+    {
+        <div class="col-sm">
+            <div class="jumbotron text-center">
+                <h4>
+                    <small>Nenhum produto encontrado, por favor refaça sua busca</small>
+                </h4>
+            </div>
+        </div>
+    }
+</div>

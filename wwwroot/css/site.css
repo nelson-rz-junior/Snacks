@@ -1,0 +1,27 @@
+﻿
+nav {
+    padding: 8px;
+    background-color: #006b96;
+}
+
+.marginTop {
+    margin-top: 5%;
+}
+
+.marginTop1 {
+    margin-top: 2%;
+}
+
+.carousel img {
+    min-width: 100%;
+}
+
+#validationSummary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.headerColor {
+    background-color: #c9a0dc; /*wisteria*/
+    /*background-color: e3f2fd;*/
+}
