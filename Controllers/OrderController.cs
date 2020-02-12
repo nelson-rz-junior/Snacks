@@ -55,7 +55,7 @@ namespace Snacks.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(Order order)
+        public async Task<IActionResult> Checkout(Order order)
         {
             IActionResult result = View(order);
 
@@ -65,7 +65,8 @@ namespace Snacks.Controllers
             }
             else
             {
-                var basket = _basketRepository.GetBasket(_basketId);
+                var userId = _userManager.GetUserId(User);
+                var basket = _basketRepository.GetBasket(_basketId, userId);
                 if (basket != null)
                 {
                     if (ModelState.IsValid)

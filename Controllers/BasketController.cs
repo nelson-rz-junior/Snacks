@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Snacks.Controllers
 {
+    [Authorize]
     public class BasketController : Controller
     {
         private readonly ISnackRepository _snackRepository;
@@ -43,7 +44,8 @@ namespace Snacks.Controllers
             
             if (_basketId != Guid.Empty)
             {
-                var basket = _basketRepository.GetBasket(_basketId);
+                var userId = _userManager.GetUserId(User);
+                var basket = _basketRepository.GetBasket(_basketId, userId);
                 if (basket != null)
                 {
                     basket.BasketItems.Select(s => s.Snack).SetImages(_imagesManagement);
@@ -55,7 +57,6 @@ namespace Snacks.Controllers
             return View(basketViewModel);
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> AddBasketItem(int snackId)
         {
@@ -86,7 +87,6 @@ namespace Snacks.Controllers
             return result;
         }
 
-        [Authorize]
         [HttpGet]
         public IActionResult RemoveBasketItem(int snackId)
         {

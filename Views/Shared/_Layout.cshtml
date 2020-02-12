@@ -32,7 +32,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         @await Html.PartialAsync("_Login")
-                        @await Component.InvokeAsync("SummaryBasket")
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @await Component.InvokeAsync("SummaryBasket", User)
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @await Component.InvokeAsync("MenuCategory", "Categorias")

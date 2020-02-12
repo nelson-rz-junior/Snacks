@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Snacks.Context;
-using Snacks.Repositories.Interfaces;
 using Snacks.Models;
+using Snacks.Repositories.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Snacks.Repositories
@@ -17,12 +16,12 @@ namespace Snacks.Repositories
             _context = context;
         }
 
-        public Basket GetBasket(Guid basketId)
+        public Basket GetBasket(Guid basketId, string userId)
         {
             return _context.Baskets
                 .Include(i => i.BasketItems)
                 .ThenInclude(i => i.Snack)
-                .Where(b => b.Id == basketId)
+                .Where(b => b.Id == basketId && b.UserId == userId)
                 .FirstOrDefault();
         }
 
@@ -101,14 +100,6 @@ namespace Snacks.Repositories
             }
 
             return quantity;
-        }
-
-        public List<BasketItem> GetBasketItems(Guid basketId)
-        {
-            return _context.BasketItems
-                .Include(i => i.Snack)
-                .Where(b => b.BasketId == basketId)
-                .ToList();
         }
 
         public decimal GetTotalBasket(Guid basketId)
