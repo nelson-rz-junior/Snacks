@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Snacks.Context;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Snacks.Areas.Admin.Controllers
@@ -22,6 +23,7 @@ namespace Snacks.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var snacks = await _context.Orders
+                .OrderByDescending(o => o.CreateDate)
                 .ToListAsync();
 
             return View(snacks);

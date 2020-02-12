@@ -3,24 +3,33 @@ using Snacks.Repositories.Interfaces;
 using Snacks.Models;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Snacks.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
         private readonly SnackContext _context;
-        private readonly IBasketRepository _basketRepository;
 
-        public OrderRepository(SnackContext context, IBasketRepository basketRepository)
+        public OrderRepository(SnackContext context)
         {
             _context = context;
-            _basketRepository = basketRepository;
         }
 
-        public Order GetOrder(int orderId, Guid basketId)
+        public IEnumerable<Order> GetOrders(ApplicationUser user)
         {
             return _context.Orders
-                .Where(o => o.Id == orderId && o.BasketId == basketId)
+                .Where(o => o.UserId == user.Id)
+                .OrderByDescending(o => o.CreateDate);
+        }
+
+        public Order GetOrder(int orderId, ApplicationUser user)
+        {
+            return _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(o => o.Snack)
+                .Where(o => o.Id == orderId && o.UserId == user.Id)
                 .FirstOrDefault();
         }
 

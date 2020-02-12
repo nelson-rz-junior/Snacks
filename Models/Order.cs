@@ -8,6 +8,7 @@ namespace Snacks.Models
 {
     public class Order
     {
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
         [BindNever]
@@ -24,6 +25,7 @@ namespace Snacks.Models
         [StringLength(50)]
         public string LastName { get; set; }
 
+        [Display(Name = "E-mail")]
         [StringLength(50)]
         public string Email { get; set; }
 
@@ -67,7 +69,7 @@ namespace Snacks.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalOrder { get; set; }
 
-        [Display(Name = "Recebido")]
+        [Display(Name = "Data")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime CreateDate { get; set; }

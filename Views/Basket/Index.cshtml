@@ -42,34 +42,34 @@
                 <tbody>
                     @foreach (var item in Model.BasketItems)
                     {
-                    <tr>
-                        <td class="text-left">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@item.SnackId" title="@item.SnackName">
-                                        <img src="@item.Snack.ThumbImageUrl" width="100" height="100" />
-                                    </a>
+                        <tr>
+                            <td class="text-left">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@item.SnackId" title="@item.SnackName">
+                                            <img src="@item.Snack.ThumbImageUrl" width="100" height="100" />
+                                        </a>
+                                    </div>
+                                    <div class="col-sm">
+                                        <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@item.SnackId" class="text-dark text-decoration-none">
+                                            @item.SnackName
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col-sm">
-                                    <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@item.SnackId" class="text-dark text-decoration-none">
-                                        @item.SnackName
-                                    </a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-center align-middle">
-                            @item.Quantity
-                        </td>
-                        <td class="text-right align-middle">
-                            @item.UnitPrice.ToString("c")
-                        </td>
-                        <td class="text-right align-middle">
-                            @((item.Quantity * item.UnitPrice).ToString("c"))
-                        </td>
-                        <td class="text-center align-middle">
-                            <a class="fas fa-trash-alt" asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-snackId="@item.SnackId"></a>
-                        </td>
-                    </tr>
+                            </td>
+                            <td class="text-center align-middle">
+                                @item.Quantity
+                            </td>
+                            <td class="text-right align-middle">
+                                @item.UnitPrice.ToString("c")
+                            </td>
+                            <td class="text-right align-middle">
+                                @((item.Quantity * item.UnitPrice).ToString("c"))
+                            </td>
+                            <td class="text-center align-middle">
+                                <a class="fas fa-trash-alt" asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-snackId="@item.SnackId"></a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
                 <tfoot>

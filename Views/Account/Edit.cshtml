@@ -1,14 +1,14 @@
 ﻿@model RegisterViewModel
 
 @{
-    ViewData["Title"] = "Cadastro";
+    ViewData["Title"] = "Editar cadastro";
 }
 
 <div class="row">
     <div class="col-sm">
         <div class="p-1 text-dark text-center my-2 headerColor">
             <h4>
-                <small>Cadastro</small>
+                <small>Editar cadastro</small>
             </h4>
         </div>
         <hr />
@@ -16,7 +16,8 @@
     </div>
 </div>
 
-<form asp-controller="Account" asp-action="Register" method="post">
+<form asp-controller="Account" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
     <div class="form-row">
         <div class="form-group col-sm-6">
             <label asp-for="Email" class="control-label"></label>
@@ -30,6 +31,8 @@
             <input asp-for="FirstName" class="form-control" />
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
+    </div>
+    <div class="form-row">
         <div class="form-group col-sm-6">
             <label asp-for="LastName" class="control-label"></label>
             <input asp-for="LastName" class="form-control" />
@@ -38,20 +41,8 @@
     </div>
     <div class="form-row">
         <div class="form-group col-sm-6">
-            <label asp-for="Password" class="control-label"></label>
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group col-sm-6">
-            <label asp-for="ConfirmPassword" class="control-label"></label>
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-sm">
-            <input type="submit" class="btn btn-outline-success float-right ml-2" value="Cadastrar" />
-            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary float-right">Ir para o login</a>
+            <input type="submit" class="btn btn-outline-success float-right w-25 ml-2" value="Editar" />
+            <a asp-controller="Account" asp-action="ChangePassword" class="btn btn-outline-primary float-right">Alterar senha</a>
         </div>
     </div>
 </form>

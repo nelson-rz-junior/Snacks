@@ -1,11 +1,14 @@
-﻿using Snacks.Models;
+﻿using Snacks.Context;
+using Snacks.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Snacks.Repositories.Interfaces
 {
     public interface IOrderRepository
     {
-        Order GetOrder(int orderId, Guid basketId);
+        IEnumerable<Order> GetOrders(ApplicationUser user);
+        Order GetOrder(int orderId, ApplicationUser user);
         void CreateOrder(Basket basket, Order order);
     }
 }

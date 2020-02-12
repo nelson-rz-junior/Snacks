@@ -34,7 +34,9 @@
     </div>
     <div class="form-row">
         <div class="form-group col-sm-6">
-            <input type="submit" class="btn btn-outline-success float-right w-25" value="Login" />
+            <input type="submit" class="btn btn-outline-success float-right w-25 ml-2" value="Login" />
+            <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary float-right ml-2">Novo cadastro</a>
+            <a asp-controller="Account" asp-action="ForgotPassword" class="btn btn-outline-primary float-right">Redefinir senha</a>
         </div>
     </div>
 </form>

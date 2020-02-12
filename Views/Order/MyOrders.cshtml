@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Order>
+
+@{
+    ViewData["Title"] = "Meus pedidos";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <div class="p-1 text-dark text-center my-2 headerColor">
+            <h4>
+                <small>Meus pedidos</small>
+            </h4>
+        </div>
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.IsPaid)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.IsDelivery)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.TotalOrder)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FirstName)
+                        @Html.DisplayFor(model => item.LastName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(model => item.IsPaid)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(model => item.IsDelivery)
+                    </td>
+                    <td class="text-right">
+                        @item.TotalOrder.ToString("c")
+                    </td>
+                    <td>
+                        <a asp-action="OrderDetails" asp-route-orderId="@item.Id" class="fas fa-info-circle btn btn-outline-secondary float-right" title="Detalhes"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="jumbotron text-center">
+        <h4>
+            <small>Nenhum pedido encontrado</small>
+        </h4>
+    </div>
+}

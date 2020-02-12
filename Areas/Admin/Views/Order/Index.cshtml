@@ -35,7 +35,7 @@
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.IsDelivery)
             </th>
-            <th class="text-center">
+            <th class="text-right">
                 @Html.DisplayNameFor(model => model.TotalOrder)
             </th>
             <th></th>
@@ -46,34 +46,34 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(model => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(model => item.FirstName)
+                    @Html.DisplayFor(model => item.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(model => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
+                    @Html.DisplayFor(model => item.CreateDate)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.IsPaid)
+                    @Html.DisplayFor(model => item.IsPaid)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.IsDelivery)
+                    @Html.DisplayFor(model => item.IsDelivery)
                 </td>
                 <td class="text-right">
                     @item.TotalOrder.ToString("c")
                 </td>
                 <td>
                     <a asp-action="Delivery" asp-route-id="@item.Id" asp-route-checkDelivery="@(!item.IsDelivery)"
-                       class="fas fa-shipping-fast btn btn-outline-@(item.IsDelivery ? "success" : "danger") float-right @(!item.IsPaid ? "disabled" : "")" style="margin-left:10px"
+                       class="fas fa-shipping-fast btn btn-outline-@(item.IsDelivery ? "success" : "danger") float-right ml-2 @(!item.IsPaid ? "disabled" : "")" 
                        title="Marcar como @(item.IsDelivery ? "não entregue" : "entregue")"></a>
 
                     <a asp-action="Payment" asp-route-id="@item.Id" asp-route-checkPayment="@(!item.IsPaid)"
-                       class="fas fa-money-bill-alt btn btn-outline-@(item.IsPaid ? "success" : "danger") float-right @(item.IsDelivery ? "disabled" : "")" style="margin-left:10px"
+                       class="fas fa-money-bill-alt btn btn-outline-@(item.IsPaid ? "success" : "danger") float-right ml-2 @(item.IsDelivery ? "disabled" : "")" 
                        title="Marcar como @(item.IsPaid ? "não pago" : "pago")"></a>
 
                     <a asp-action="Details" asp-route-id="@item.Id" class="fas fa-info-circle btn btn-outline-secondary float-right" title="Detalhes"></a>

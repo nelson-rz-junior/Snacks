@@ -13,6 +13,8 @@ using Snacks.Repositories;
 using System;
 using Snacks.Services.Identity.Roles;
 using Snacks.Services.Images;
+using Snacks.Services.Email.Interfaces;
+using Snacks.Services.Email;
 
 namespace Snacks
 {
@@ -45,6 +47,12 @@ namespace Snacks
             .AddDefaultTokenProviders()
             .AddErrorDescriber<BrazilianPortugueseIdentityErrorDescriber>();
 
+            // Token lifespan
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromMinutes(30);
+            });
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
@@ -62,6 +70,12 @@ namespace Snacks
             // Adds a default in-memory implementation of IDistributedCache
             services.AddDistributedMemoryCache();
             services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(5));
+
+            // MailKit
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>());
+
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddControllersWithViews();
         }

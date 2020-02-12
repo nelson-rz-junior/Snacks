@@ -1,21 +1,5 @@
 ﻿@model Order
 
-@{
-    ViewData["Title"] = "Detalhe do pedido";
-}
-
-<div class="row">
-    <div class="col-sm">
-        <div class="p-1 text-dark text-center my-2 headerColor">
-            <h4>
-                <small>Detalhe do pedido #@Model.Id</small>
-            </h4>
-        </div>
-        <hr />
-        <div id="validationSummary" asp-validation-summary="ModelOnly" class="text-danger"></div>
-    </div>
-</div>
-
 <div>
     <dl class="row">
         <dt class="col-sm-2">
@@ -30,12 +14,6 @@
         </dt>
         <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BasketId)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.BasketId)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateDate)
@@ -139,9 +117,6 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.OrderItems.First().Id)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.OrderItems.First().SnackName)
                     </th>
                     <th class="text-right">
@@ -159,25 +134,33 @@
                 @foreach (var orderItem in Model.OrderItems)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => orderItem.Id)
+                        <td class="text-left">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@orderItem.SnackId" title="@orderItem.SnackName">
+                                        <img src="@orderItem.Snack.ThumbImageUrl" width="100" height="100" />
+                                    </a>
+                                </div>
+                                <div class="col-sm">
+                                    <a asp-controller="Snack" asp-action="Details" asp-route-snackId="@orderItem.SnackId" class="text-dark text-decoration-none">
+                                        @orderItem.SnackName
+                                    </a>
+                                </div>
+                            </div>
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => orderItem.SnackName)
-                        </td>
-                        <td class="text-right">
+                        <td class="text-right align-middle">
                             @Html.DisplayFor(modelItem => orderItem.Quantity)
                         </td>
-                        <td class="text-right">
+                        <td class="text-right align-middle">
                             @orderItem.UnitPrice.ToString("c")
                         </td>
-                        <td class="text-right">
+                        <td class="text-right align-middle">
                             @((orderItem.UnitPrice * orderItem.Quantity).ToString("c"))
                         </td>
                     </tr>
                 }
                 <tr>
-                    <td colspan="4" class="text-right">
+                    <td colspan="3" class="text-right">
                         <b>Total</b>
                     </td>
                     <td class="text-right">
@@ -190,7 +173,7 @@
 
     <div class="row">
         <div class="col-sm">
-            <a asp-action="Index" class="btn btn-outline-secondary float-right">Lista de pedidos</a>
+            <a asp-action="MyOrders" class="btn btn-outline-secondary float-right">Lista de pedidos</a>
         </div>
     </div>
 </div>
