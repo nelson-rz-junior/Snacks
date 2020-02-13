@@ -25,9 +25,7 @@ namespace Snacks
                     var serviceProvider = services.GetRequiredService<IServiceProvider>();
                     var configuration = services.GetRequiredService<IConfiguration>();
 
-                    new RolesManagement(serviceProvider, configuration)
-                        .CreateRoles()
-                        .Wait();
+                    RolesManagement.CreateRoles(serviceProvider, configuration).Wait();
                 }
                 catch (Exception exception)
                 {

@@ -8,28 +8,19 @@ using System.Threading.Tasks;
 
 namespace Snacks.Services.Identity.Roles
 {
-    public class RolesManagement
+    public static class RolesManagement
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IConfiguration _configuration;
-
-        public RolesManagement(IServiceProvider serviceProvider, IConfiguration configuration)
+        public static async Task CreateRoles(IServiceProvider serviceProvider, IConfiguration configuration)
         {
-            _serviceProvider = serviceProvider;
-            _configuration = configuration;
-        }
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        public async Task CreateRoles()
-        {
-            var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            var roleManager = _serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userEmail = configuration.GetSection("Identity")["AdminEmail"];
+            var userPassword = configuration.GetSection("Identity")["AdminPassword"];
+            var firstName = configuration.GetSection("Identity")["AdminFirstName"];
+            var lastName = configuration.GetSection("Identity")["AdminLastName"];
 
-            var userEmail = _configuration.GetSection("Identity")["AdminEmail"];
-            var userPassword = _configuration.GetSection("Identity")["AdminPassword"];
-            var firstName = _configuration.GetSection("Identity")["AdminFirstName"];
-            var lastName = _configuration.GetSection("Identity")["AdminLastName"];
-
-            var roleNames = _configuration.GetSection("Identity:RoleNames").Get<List<string>>();
+            var roleNames = configuration.GetSection("Identity:RoleNames").Get<List<string>>();
 
             foreach (var roleName in roleNames)
             {
