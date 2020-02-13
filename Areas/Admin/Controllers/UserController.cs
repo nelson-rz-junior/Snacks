@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Snacks.Areas.Admin.ViewModels;
+using Snacks.Context;
 using Snacks.Services.Identity.Roles;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ namespace Snacks.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IRolesConfig _roleConfig;
 
-        public UserController(UserManager<IdentityUser> userManager, IRolesConfig rolesConfig)
+        public UserController(UserManager<ApplicationUser> userManager, IRolesConfig rolesConfig)
         {
             _userManager = userManager;
             _roleConfig = rolesConfig;
@@ -37,7 +38,8 @@ namespace Snacks.Areas.Admin.Controllers
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Role = string.Join(',', roles)
                 });
             }
@@ -62,7 +64,8 @@ namespace Snacks.Areas.Admin.Controllers
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Role = string.Join(',', roles),
                     RoleItems = _roleConfig.GetRoles()
                 };
@@ -93,7 +96,7 @@ namespace Snacks.Areas.Admin.Controllers
                 if (user != null)
                 {
                     user.Email = model.Email;
-                    user.UserName = model.UserName;
+                    user.UserName = model.Email;
 
                     var updateUser = await _userManager.UpdateAsync(user);
                     if (updateUser.Succeeded)
@@ -167,10 +170,12 @@ namespace Snacks.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
-                    UserName = createUserViewModel.UserName,
-                    Email = createUserViewModel.Email
+                    UserName = createUserViewModel.Email,
+                    Email = createUserViewModel.Email,
+                    FirstName = createUserViewModel.FirstName,
+                    LastName = createUserViewModel.LastName
                 };
 
                 var userRegister = await _userManager.CreateAsync(user, createUserViewModel.Password);
@@ -217,7 +222,8 @@ namespace Snacks.Areas.Admin.Controllers
                 {
                     Id = id,
                     Email = user.Email,
-                    UserName = user.UserName
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
                 };
 
                 var userRoles = await _userManager.GetRolesAsync(user);

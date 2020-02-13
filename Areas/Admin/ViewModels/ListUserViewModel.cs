@@ -8,9 +8,13 @@ namespace Snacks.Areas.Admin.ViewModels
     {
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "Informe o usuário")]
-        [Display(Name = "Usuário")]
-        public string UserName { get; set; }
+        [Required(ErrorMessage = "Informe o nome")]
+        [Display(Name = "Nome")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Informe o sobrenome")]
+        [Display(Name = "Sobrenome")]
+        public string LastName { get; set; }
 
         [Required(ErrorMessage = "Informe o e-mail")]
         [Display(Name = "E-mail")]
