@@ -55,7 +55,7 @@ namespace Snacks
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+                options.AccessDeniedPath = new PathString("/Admin/Home/AccessDenied");
             });
 
             services.AddTransient<ICategoryRepository, CategoryRepository>();

@@ -11,5 +11,12 @@ namespace Snacks.Areas.Admin.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            ViewData["AccessDeniedUrl"] = returnUrl;
+            return View();
+        }
     }
 }

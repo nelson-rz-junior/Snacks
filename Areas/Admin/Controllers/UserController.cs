@@ -273,13 +273,6 @@ namespace Snacks.Areas.Admin.Controllers
             return result;
         }
 
-        [AllowAnonymous]
-        public IActionResult AccessDenied(string returnUrl)
-        {
-            ViewData["AccessDeniedUrl"] = returnUrl;
-            return View();
-        }
-
         private void AddModelErrors(IEnumerable<IdentityError> identityErrors)
         {
             foreach (var error in identityErrors)
