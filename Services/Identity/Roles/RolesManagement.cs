@@ -15,10 +15,10 @@ namespace Snacks.Services.Identity.Roles
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var userEmail = configuration.GetSection("Identity")["AdminEmail"];
-            var userPassword = configuration.GetSection("Identity")["AdminPassword"];
-            var firstName = configuration.GetSection("Identity")["AdminFirstName"];
-            var lastName = configuration.GetSection("Identity")["AdminLastName"];
+            var userEmail = configuration["Identity:AdminEmail"];
+            var userPassword = configuration["Identity:AdminPassword"];
+            var firstName = configuration["Identity:AdminFirstName"];
+            var lastName = configuration["Identity:AdminLastName"];
 
             var roleNames = configuration.GetSection("Identity:RoleNames").Get<List<string>>();
 
